@@ -1,22 +1,32 @@
 {
-  "name": "honode-kit",
-  "version": "1.0.0",
-  "description": "A hono API and SvelteKit SPA in node.js",
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "test": "turbo run test",
-    "format": "prettier --write ."
-  },
-  "keywords": [],
-  "author": "Artifex",
-  "devDependencies": {
-    "@honode-kit/eslint-config": "workspace:*",
-    "eslint": "^9.2.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-svelte": "^3.2.3",
-    "prettier-plugin-tailwindcss": "^0.5.14",
-    "turbo": "^1.13.3"
-  }
+	"name": "honode-kit",
+	"version": "0.0.1",
+	"description": "A Hono API inside SvelteKit in node.js",
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"start": "turbo run start",
+		"test": "turbo run test",
+		"format": "prettier --write .",
+		"db:check": "drizzle-kit check",
+		"db:drop": "drizzle-kit drop",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:pull": "drizzle-kit introspect",
+		"db:push": "drizzle-kit push",
+		"db:seed": "tsx ./seed.ts",
+		"db:studio": "drizzle-kit studio --verbose"
+	},
+	"keywords": [],
+	"author": "Artifex",
+	"devDependencies": {
+		"drizzle-kit": "^0.21.2",
+		"@honode-kit/eslint-config": "workspace:*",
+		"eslint": "^8.56.0",
+		"prettier": "^3.2.5",
+		"prettier-plugin-svelte": "^3.2.3",
+		"prettier-plugin-tailwindcss": "^0.5.14",
+		"turbo": "^1.13.3"
+	}
 }

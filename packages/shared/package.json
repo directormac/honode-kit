@@ -2,35 +2,63 @@
 	"name": "@honode-kit/shared",
 	"version": "0.0.0",
 	"description": "Shared Package for Honode Kit",
-	"main": "index.js",
+	"main": "./src/",
 	"exports": {
-		".": {
-			"types": "./src/index.ts",
-			"import": "./src/index.ts"
+		"./server": {
+			"import": "./src/server/index.ts",
+			"node": "./src/server/index.ts"
 		},
-		"./types": {
-			"types": "./src/types/index.ts",
-			"import": "./src/types/index.ts"
+		"./server/auth": {
+			"import": "./src/server/auth/index.ts",
+			"node": "./src/server/auth/index.ts"
 		},
-		"./constants": {
-			"types": "./src/constants/index.ts",
-			"import": "./src/constants/index.ts"
+		"./server/db": {
+			"import": "./src/server/db/index.ts",
+			"node": "./src/server/db/index.ts"
+		},
+		"./client": {
+			"import": "./src/client/index.ts",
+			"node": "./src/client/index.ts"
 		},
 		"./schemas": {
-			"types": "./src/schemas/index.ts",
-			"import": "./src/schemas/index.ts"
+			"import": "./src/schemas/index.ts",
+			"node": "./src/schemas/index.ts"
+		},
+		"./types": {
+			"import": "./src/types/index.ts",
+			"node": "./src/client/index.ts"
+		},
+		"./constants": {
+			"import": "./src/constants/index.ts",
+			"node": "./src/constants/index.ts"
 		},
 		"./utils": {
-			"types": "./src/utils/index.ts",
-			"import": "./src/utils/index.ts"
+			"import": "./src/utils/index.ts",
+			"node": "./src/utils/index.ts"
 		}
 	},
 	"scripts": {
-		"lint": "eslint ."
+		"lint": "eslint src"
 	},
 	"keywords": [],
 	"author": "Artifex",
+	"dependencies": {
+		"dotenv": "^16.4.5"
+	},
 	"devDependencies": {
-		"@honode-kit/eslint-config": "workspace:*"
+		"@hono/zod-validator": "^0.2.1",
+		"@honode-kit/tsconfig": "workspace:*",
+		"@lucia-auth/adapter-drizzle": "^1.0.7",
+		"drizzle-orm": "^0.30.10",
+		"drizzle-zod": "^0.5.1",
+		"hono": "^4.3.7",
+		"pino": "^9.1.0",
+		"pino-pretty": "^11.0.0",
+		"postgres": "^3.4.4",
+		"http-status-codes": "^2.3.0",
+		"lucia": "^3.2.0",
+		"oslo": "^1.2.0",
+		"zod": "^3.23.8",
+		"date-fns": "^3.6.0"
 	}
 }

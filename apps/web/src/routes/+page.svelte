@@ -1,150 +1,67 @@
 <script lang="ts">
-	import { delay } from '@honode-kit/shared/utils';
-	import { cn } from '@honode-kit/ui/utils';
-	import { onMount } from 'svelte';
-	import { Button } from '@honode-kit/ui/button';
+	import type { PageData } from './$types';
 
-	let status = $state('Disconnected');
-	let currentTime = $state(new Date().toString());
-	let pingMessage = $state('Not pinged');
+	let currentTime = $state('');
 
-	let wsPing: WebSocket;
-
-	onMount(() => {
-		wsPing = new WebSocket('ws://localhost:3000');
-
-		const eventSource = new EventSource('/api/current-time');
-
-		eventSource.onopen = () => {
-			status = 'Connected';
-		};
-
-		eventSource.onerror = () => {
-			console.log('Error');
-		};
+	$effect(() => {
+		const eventSource = new EventSource('/api/time');
 
 		eventSource.onmessage = (event) => {
 			currentTime = event.data;
 		};
+
+		return () => {
+			eventSource.close();
+		};
 	});
 
-	const healthCheck = async () => {
-		await delay(2500);
-		return await fetch('/api/healthcheck').then((check) => check.text());
-	};
-
-	const ping = () => {
-		if (wsPing) {
-			wsPing.send('ping');
-		}
-		wsPing.onmessage = (event) => {
-			if (event.data.includes('Pong')) {
-				pingMessage = event.data;
-			}
-		};
-	};
+	let { data } = $props();
+	let user = $state<PageData['user']>(data.user);
 </script>
 
-<main class="grid place-items-center">
-	<h1 class="text-4xl font-semibold">Welcome to Honobun kit</h1>
-	<p class={cn(status === 'Connected' ? 'text-green-500' : 'text-red-500')}>
-		{status}
+<main class="grid justify-items-center gap-y-3.5 py-4">
+	<h1 class="font-bold">Welcome to SvelteKit</h1>
+
+	<p>
+		Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
 	</p>
-	<p>{currentTime}</p>
 
-	<Button
-		size="lg"
-		onclick={ping}
-		class={cn(pingMessage === 'Not pinged' ? 'bg-white' : 'bg-green-500')}
-		>Ping Server</Button
-	>
-	<p>{pingMessage}</p>
+	{#if user}
+		<div style="display: grid; gap: 1rem;">
+			<p>welcome back, {user.name}!</p>
 
-	<div>
-		{#await healthCheck()}
-			Checking health..
-		{:then check}
-			{#if check === 'OK'}
-				<p>
-					Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-				</p>
+			{#if user.role === 'admin'}
+				<a class="hover:underline" href="/admin/users">Manage Users</a>
 			{/if}
-		{/await}
-	</div>
-</main>
 
-<!-- <script lang="ts"> -->
-<!-- 	import { delay } from '@honobun-kit/shared/utils'; -->
-<!-- 	import { Button } from '@honobun-kit/ui/button'; -->
-<!-- 	import { cn } from '@honobun-kit/ui/utils'; -->
-<!-- 	import { onMount } from 'svelte'; -->
-<!---->
-<!-- 	let status = $state('Disconnected'); -->
-<!-- 	let currentTime = $state(new Date().toString()); -->
-<!-- 	let pingMessage = $state('Not pinged'); -->
-<!---->
-<!-- 	let ws: WebSocket; -->
-<!-- 	let wsPing: WebSocket; -->
-<!---->
-<!-- 	onMount(() => { -->
-<!-- 		wsPing = new WebSocket('ws://localhost:3000/api/ws/ping'); -->
-<!---->
-<!-- 		setTimeout(() => { -->
-<!-- 			ws = new WebSocket('ws://localhost:3000/api/ws'); -->
-<!-- 			ws.onopen = () => { -->
-<!-- 				status = 'Connected'; -->
-<!-- 			}; -->
-<!---->
-<!-- 			ws.onmessage = (event) => { -->
-<!-- 				currentTime = event.data; -->
-<!-- 			}; -->
-<!-- 		}, 1000); -->
-<!---->
-<!-- 		return () => { -->
-<!-- 			ws.close(); -->
-<!-- 			wsPing.close(); -->
-<!-- 		}; -->
-<!-- 	}); -->
-<!---->
-<!-- 	const healthCheck = async () => { -->
-<!-- 		await delay(2500); -->
-<!-- 		return await fetch('/api/healthcheck').then((check) => check.text()); -->
-<!-- 	}; -->
-<!---->
-<!-- 	const ping = () => { -->
-<!-- 		if (wsPing) { -->
-<!-- 			wsPing.send('ping'); -->
-<!-- 		} -->
-<!-- 		wsPing.onmessage = (event) => { -->
-<!-- 			pingMessage = event.data; -->
-<!-- 		}; -->
-<!-- 	}; -->
-<!-- </script> -->
-<!---->
-<!-- <main class="grid place-items-center"> -->
-<!-- 	<h1 class="text-4xl font-semibold">Welcome to Honobun kit</h1> -->
-<!-- 	<p class={cn(status === 'Connected' ? 'text-green-500' : 'text-red-500')}> -->
-<!-- 		{status} -->
-<!-- 	</p> -->
-<!-- 	<p>{currentTime}</p> -->
-<!---->
-<!-- 	<Button -->
-<!-- 		size="lg" -->
-<!-- 		onclick={ping} -->
-<!-- 		class={cn(pingMessage === 'Not pinged' ? 'bg-white' : 'bg-green-500')} -->
-<!-- 		>Ping Server</Button -->
-<!-- 	> -->
-<!-- 	<p>{pingMessage}</p> -->
-<!---->
-<!-- 	<div> -->
-<!-- 		{#await healthCheck()} -->
-<!-- 			Checking health.. -->
-<!-- 		{:then check} -->
-<!-- 			{#if check === 'OK'} -->
-<!-- 				<p> -->
-<!-- 					Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation -->
-<!-- 				</p> -->
-<!-- 			{/if} -->
-<!-- 		{/await} -->
-<!-- 	</div> -->
-<!-- </main> -->
+			<form method="POST" action="/api/auth/logout">
+				<input
+					type="submit"
+					value="logout"
+					class="rounded border-0 bg-indigo-500 px-6 py-2 text-lg text-white hover:bg-indigo-600 focus:outline-none"
+				/> />
+			</form>
+		</div>
+	{:else}
+		<div style="display: grid; gap: 1rem;">
+			<p>
+				No account yet? <a class="hover:underline" href="/signup">Signup here</a
+				>
+			</p>
+			<p>
+				Already have an account? <a class="hover:underline" href="/login"
+					>Login here</a
+				>
+			</p>
+		</div>
+	{/if}
+
+	{#await data.healthcheck then ok}
+		<div style="padding: 1rem 1rem 0 0;">
+			<p>
+				Server is {ok}:
+				{currentTime}
+			</p>
+		</div>
+	{/await}
+</main>

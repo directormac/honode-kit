@@ -2,4 +2,6 @@
 	let { children } = $props();
 </script>
 
-{@render children()}
+<main class="grid justify-items-center gap-y-12 py-4">
+	{@render children()}
+</main>

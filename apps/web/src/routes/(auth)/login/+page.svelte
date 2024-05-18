@@ -36,11 +36,17 @@
 	};
 </script>
 
-<h2>Login Page</h2>
+<h2 class="title-font text-2xl font-semibold tracking-widest">Login Page</h2>
 {#snippet field(name: keyof AuthFormSchema, type: HTMLInputElement['type'], label: string)}
 	<div class="form-group">
-		<label for={name}>{label}</label>
-		<input {name} {type} bind:value={fields[name]} />
+		<label class="text-sm leading-7 text-gray-600" for={name}>{label}</label>
+		<input
+			class="w-full rounded border border-gray-300 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+			id={name}
+			{name}
+			{type}
+			bind:value={fields[name]}
+		/>
 		{#if errorFields && errorFields[name]}
 			<p>{errorFields[name]}</p>
 		{/if}
@@ -55,7 +61,11 @@
 
 	{@render field('password', 'password', 'Password')}
 
-	<input type="submit" value="Login" />
+	<input
+		class="rounded border-0 bg-indigo-500 px-6 py-2 text-lg text-white hover:bg-indigo-600 focus:outline-none"
+		type="submit"
+		value="Login"
+	/>
 </form>
 
 <p>No account yet? <a href="/signup">Signup here</a></p>

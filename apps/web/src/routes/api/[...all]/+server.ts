@@ -1,4 +1,4 @@
-import hono from '@honode-kit/shared/server';
+import { hono } from '@honode-kit/shared/server';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = ({ request }) => hono.fetch(request);

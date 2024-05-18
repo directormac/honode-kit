@@ -1,0 +1,13 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Shared",
+	"extends": "@honode-kit/tsconfig/base.json",
+	"compilerOptions": {
+		"composite": false,
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "bundler"
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["tests", "node_modules"]
+}

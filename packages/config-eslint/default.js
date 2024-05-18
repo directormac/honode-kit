@@ -4,7 +4,6 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'@hono/eslint-config',
-		'prettier',
-		'drizzle'
+		'prettier'
 	]
 };

@@ -1,3 +1,9 @@
+export const wsUrl = (pathname: string = '') => {
+	const browser = typeof window !== 'undefined';
+	if (browser) return `ws${location.origin.slice(4)}${pathname}`;
+	return '';
+};
+
 export const delay = (milliseconds: number): Promise<void> => {
 	return new Promise<void>(function run(resolve) {
 		setTimeout(resolve, milliseconds);
@@ -15,3 +21,5 @@ export const debounce = <T extends (...args: any[]) => void>(
 		timeoutId = setTimeout(() => func(...args), delay);
 	};
 };
+
+export * from './parser.util';

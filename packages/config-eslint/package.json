@@ -7,12 +7,13 @@
 		"svelte.js"
 	],
 	"dependencies": {
+		"eslint": "^8.56.0",
 		"@hono/eslint-config": "^0.0.4",
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
-		"@typescript-eslint/parser": "^7.8.0",
 		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-svelte": "^2.36.0-next.4",
+		"@typescript-eslint/parser": "^7.8.0",
 		"eslint-config-turbo": "^1.12.4",
-		"eslint-plugin-drizzle": "^0.2.3",
-		"eslint-plugin-svelte": "^2.35.1"
+		"eslint-plugin-drizzle": "^0.2.3"
 	}
 }

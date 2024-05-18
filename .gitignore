@@ -5,6 +5,12 @@ node_modules
 .pnp
 .pnp.js
 
+# build
+/build
+/.svelte-kit
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
 # testing
 coverage
 
@@ -21,6 +27,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+!.env.example
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -28,3 +36,5 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+

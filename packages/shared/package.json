@@ -4,10 +4,6 @@
 	"description": "Shared Package for Honode Kit",
 	"main": "./src/",
 	"exports": {
-		".": {
-			"import": "./src/index.ts",
-			"node": "./src/index.ts"
-		},
 		"./server": {
 			"import": "./src/server/index.ts",
 			"node": "./src/server/index.ts"

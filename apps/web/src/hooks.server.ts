@@ -1,4 +1,4 @@
-import { hc, type AppType } from '$lib/api';
+import { hc, type AppType } from '@honode-kit/shared/client';
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { auth } from '@honode-kit/shared/server/auth';

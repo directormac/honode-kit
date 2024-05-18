@@ -2,7 +2,7 @@
 // for information about these interfaces
 
 import type { User, Session } from '@honode-kit/shared/types';
-import type { ClientType } from '$lib/api';
+import type { ClientType } from '@honode-kit/shared/client';
 
 declare global {
 	namespace App {

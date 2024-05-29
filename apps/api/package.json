@@ -1,0 +1,21 @@
+{
+	"name": "api",
+	"version": "0.0.1",
+	"private": true,
+	"author": "artifex",
+	"description": "A hono starter for Node.js",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"build": "rm -rf dist && tsup ./src/index.ts --dts"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.11.1",
+		"hono": "^4.4.0"
+	},
+	"devDependencies": {
+		"@microsoft/api-extractor": "^7.46.1",
+		"@types/node": "^20.11.17",
+		"tsup": "^8.0.2",
+		"tsx": "^4.7.1"
+	}
+}

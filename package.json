@@ -21,8 +21,8 @@
 	"keywords": [],
 	"author": "Artifex",
 	"devDependencies": {
-		"drizzle-kit": "^0.21.2",
 		"@honode-kit/eslint-config": "workspace:*",
+		"drizzle-kit": "^0.21.4",
 		"eslint": "^8.56.0",
 		"prettier": "^3.2.5",
 		"prettier-plugin-svelte": "^3.2.3",

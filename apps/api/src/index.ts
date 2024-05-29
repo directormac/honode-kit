@@ -12,9 +12,13 @@ const routes = app
 export type AppRoutes = typeof routes;
 
 const port = 3000;
-console.log(`Server is running on port ${port}`);
 
-serve({
-	fetch: app.fetch,
-	port
-});
+serve(
+	{
+		fetch: app.fetch,
+		port
+	},
+	(info) => {
+		console.log(`Listening on ${info.address}:${info.port}`);
+	}
+);
